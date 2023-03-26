@@ -1,5 +1,7 @@
 import "@/styles/variables.scss";
+import "@/styles/fonts.scss";
 import "@/styles/reset.scss";
+import "@/styles/button.scss";
 import "@/styles/components/header.scss";
 import type { AppProps } from "next/app";
 

@@ -6,7 +6,6 @@
 		background-color: var(--black);
 		color: var(--white);
 		font-family: var(--ff-text);
-		overflow: hidden;
 		min-height: 100vh;
 	}
 
@@ -17,6 +16,13 @@
 	h5,
 	h6 {
 		font-family: var(--ff-heading);
+	}
+
+	h1 {
+		font-size: 72px;
+		text-align: center;
+		color: var(--yellow);
+		transform: rotateX(-30deg);
 	}
 
 	p a {
