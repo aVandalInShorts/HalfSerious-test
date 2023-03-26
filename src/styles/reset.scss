@@ -6,6 +6,8 @@
 		background-color: var(--black);
 		color: var(--white);
 		font-family: var(--ff-text);
+		overflow: hidden;
+		min-height: 100vh;
 	}
 
 	h1,
@@ -35,5 +37,12 @@
 
 	a:hover {
 		color: var(--white);
+	}
+
+	button {
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
 	}
 }

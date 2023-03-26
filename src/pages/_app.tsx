@@ -1,6 +1,6 @@
-import "@/styles/variables.css";
-import "@/styles/reset.css";
-import "@/styles/components/header.css";
+import "@/styles/variables.scss";
+import "@/styles/reset.scss";
+import "@/styles/components/header.scss";
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {

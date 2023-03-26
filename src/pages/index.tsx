@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "@/styles/pages/home.module.css";
+import styles from "@/styles/pages/home.module.scss";
 import axios from "axios";
+import Header from "@/components/header";
 
 export default function Home() {
 	axios
@@ -13,6 +14,7 @@ export default function Home() {
 			<Head>
 				<title>Star Wars</title>
 			</Head>
+			<Header />
 			<main className={styles.main}></main>
 		</>
 	);

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "@/styles/pages/home.module.css";
+import styles from "@/styles/pages/home.module.scss";
 import axios from "axios";
 
 export default function Home() {
