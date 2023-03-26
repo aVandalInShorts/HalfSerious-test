@@ -40,7 +40,6 @@ export default function speciesDetail() {
 	}, [pid]);
 
 	useEffect(() => {
-		console.log("data", data);
 		if (data?.planets) {
 			getFilmsDetailItemList(
 				data?.planets,

@@ -9,7 +9,6 @@ export default (baseUrl: string, data: iBuildLinkElementsLink[]) => {
 	const allElements: JSX.Element[] = [];
 
 	data.forEach((item: iBuildLinkElementsLink, index: number) => {
-		console.log("item", item);
 		allElements.push(
 			<Link
 				href={`${baseUrl}/${item.id}/`}

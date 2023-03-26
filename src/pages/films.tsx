@@ -17,7 +17,6 @@ export default function Home() {
 		getFilms(apiUrl, (response: any) => {
 			handleItems([...response.data.results]);
 			handleNextUrl(response.data.next);
-			console.log("response", response);
 		});
 	}, []);
 

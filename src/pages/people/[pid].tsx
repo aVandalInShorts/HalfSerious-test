@@ -37,7 +37,6 @@ export default function speciesDetail() {
 	}, [pid]);
 
 	useEffect(() => {
-		console.log("data", data);
 		if (data?.starships) {
 			getPeopleDetailItemList(
 				data?.starships,
