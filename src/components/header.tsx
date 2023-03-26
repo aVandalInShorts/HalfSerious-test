@@ -1,8 +1,10 @@
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Header() {
 	const [isOpen, handleOpen] = useState(false);
+	const router = useRouter();
 
 	return (
 		<header className={`site-header${isOpen ? " is-open" : ""}`}>
@@ -11,12 +13,54 @@ export default function Header() {
 			</Link>
 
 			<nav className="site-header-nav">
-				<Link href="/films">Filmes</Link>
-				<Link href="/people">Personnages</Link>
-				<Link href="/species">Espèces</Link>
-				<Link href="/planets">Planètes</Link>
-				<Link href="/starships">Vaissaux</Link>
-				<Link href="/vehicules">Véhicules</Link>
+				<Link
+					href="/films"
+					className={
+						router.pathname.startsWith("/films") ? "active" : ""
+					}
+				>
+					Filmes
+				</Link>
+				<Link
+					href="/people"
+					className={
+						router.pathname.startsWith("/people") ? "active" : ""
+					}
+				>
+					Personnages
+				</Link>
+				<Link
+					href="/species"
+					className={
+						router.pathname.startsWith("/species") ? "active" : ""
+					}
+				>
+					Espèces
+				</Link>
+				<Link
+					href="/planets"
+					className={
+						router.pathname.startsWith("/planets") ? "active" : ""
+					}
+				>
+					Planètes
+				</Link>
+				<Link
+					href="/starships"
+					className={
+						router.pathname.startsWith("/starships") ? "active" : ""
+					}
+				>
+					Vaissaux
+				</Link>
+				<Link
+					href="/vehicules"
+					className={
+						router.pathname.startsWith("/vehicules") ? "active" : ""
+					}
+				>
+					Véhicules
+				</Link>
 			</nav>
 
 			<button

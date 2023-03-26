@@ -13,7 +13,6 @@ export default function Home() {
 	const [nextUrl, handleNextUrl] = useState("");
 
 	useEffect(() => {
-		console.log("222");
 		getSpecies(apiUrl, (response: any) => {
 			handleItems([...response.data.results]);
 			handleNextUrl(response.data.next);

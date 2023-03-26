@@ -22,9 +22,11 @@ const getSpeciesDetailItemList = (array: string[] | undefined, cb: any) => {
 };
 
 const getSpeciesDetailItemSingle = (url: string | undefined, cb: any) => {
-	axios.get(url).then((result) => {
-		cb(result.data.title || result.data.name);
-	});
+	if (url !== undefined) {
+		axios.get(url as string).then((result) => {
+			cb(result.data.title || result.data.name);
+		});
+	}
 };
 
 const handleRequest = (url: string, cb: any) => {

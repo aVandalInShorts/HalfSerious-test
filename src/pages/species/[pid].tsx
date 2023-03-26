@@ -28,8 +28,6 @@ export default function speciesDetail() {
 	}, [pid]);
 
 	useEffect(() => {
-		console.log("data", data);
-		console.log("GO");
 		if (data?.films) {
 			getSpeciesDetailItemList(data?.films, (data: string[]) => {
 				handleFilms(data.join(", "));
