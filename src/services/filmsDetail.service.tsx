@@ -2,11 +2,11 @@ import axios from "axios";
 import getIdFromUrl from "@/helpers/getIdFromUrl.helper";
 import { iBuildLinkElementsLink } from "@/helpers/buildLinkElements.helper";
 
-const getSpeciesDetail = (url: string, cb: any) => {
+const getFilmsDetail = (url: string, cb: any) => {
 	handleRequest(url, cb);
 };
 
-const getSpeciesDetailItemList = (array: string[] | undefined, cb: any) => {
+const getFilmsDetailItemList = (array: string[] | undefined, cb: any) => {
 	if (array) {
 		const requests: any = [];
 
@@ -26,27 +26,10 @@ const getSpeciesDetailItemList = (array: string[] | undefined, cb: any) => {
 	}
 };
 
-const getSpeciesDetailItemSingle = (url: string | undefined, cb: any) => {
-	if (url !== undefined) {
-		axios.get(url as string).then((result) => {
-			cb([
-				{
-					id: getIdFromUrl(result.request.responseURL),
-					value: result.data.title || result.data.name,
-				},
-			]);
-		});
-	}
-};
-
 const handleRequest = (url: string, cb: any) => {
 	axios.get(url).then((response) => {
 		cb(response);
 	});
 };
 
-export {
-	getSpeciesDetail,
-	getSpeciesDetailItemList,
-	getSpeciesDetailItemSingle,
-};
+export { getFilmsDetail, getFilmsDetailItemList };
