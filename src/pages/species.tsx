@@ -11,7 +11,7 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>Star Wars</title>
+				<title>Star Wars | Espèces</title>
 			</Head>
 			<main className={styles.main}></main>
 		</>

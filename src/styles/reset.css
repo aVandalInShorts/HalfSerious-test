@@ -1,0 +1,39 @@
+@layer reset {
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		background-color: var(--black);
+		color: var(--white);
+		font-family: var(--ff-text);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--ff-heading);
+	}
+
+	p a {
+		border-bottom: 1px solid transparent;
+		transition: all 200ms ease;
+	}
+
+	p a:hover,
+	p a:focus {
+		border-bottom-color: currentColor;
+	}
+
+	a {
+		color: var(--grey);
+		text-decoration: none;
+		transition: color 200ms ease;
+	}
+
+	a:hover {
+		color: var(--white);
+	}
+}

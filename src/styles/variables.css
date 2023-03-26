@@ -1,0 +1,21 @@
+:root {
+	--yellow: #fade4b;
+	--blue: #1786eb;
+	--grey: #b5b7b7;
+	--dark-grey: #343434;
+	--black: #000;
+	--white: #fff;
+
+	--max-width: 1100px;
+	--site-padding: 70px;
+
+	--ff-roboto: "Roboto", Arial, Helvetica, sans-serif;
+	--ff-heading: var(--ff-roboto);
+	--ff-text: var(--ff-roboto);
+}
+
+@media screen and (max-width: 767px) {
+	:root {
+		--site-padding: 30px;
+	}
+}
