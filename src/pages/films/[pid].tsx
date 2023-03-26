@@ -11,6 +11,8 @@ import DetailItem from "@/components/DetailItem";
 import buildLinkElements, {
 	iBuildLinkElementsLink,
 } from "@/helpers/buildLinkElements.helper";
+import Link from "next/link";
+import styles from "@/styles/pages/speciesDetail.module.scss";
 
 export default function speciesDetail() {
 	const router = useRouter();
@@ -107,6 +109,12 @@ export default function speciesDetail() {
 				<DetailItem title="Espèces">{speciesContent}</DetailItem>
 				<DetailItem title="Vaissaux">{starshipsContent}</DetailItem>
 				<DetailItem title="Véhicules">{vehiclesContent}</DetailItem>
+
+				<div className={styles.btnCtn}>
+					<Link href="/films" className={"btn"}>
+						Retour aux filmes
+					</Link>
+				</div>
 			</main>
 		</>
 	);

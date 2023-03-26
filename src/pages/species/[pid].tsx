@@ -13,6 +13,7 @@ import Link from "next/link";
 import buildLinkElements, {
 	iBuildLinkElementsLink,
 } from "@/helpers/buildLinkElements.helper";
+import styles from "@/styles/pages/speciesDetail.module.scss";
 
 export default function speciesDetail() {
 	const router = useRouter();
@@ -100,6 +101,12 @@ export default function speciesDetail() {
 				<DetailItem title="Personnes connues">
 					{peopleContent}
 				</DetailItem>
+
+				<div className={styles.btnCtn}>
+					<Link href="/species" className={"btn"}>
+						Retour aux espèces
+					</Link>
+				</div>
 			</main>
 		</>
 	);
