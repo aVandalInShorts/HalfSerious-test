@@ -3,72 +3,96 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import {
-	getSpeciesDetail,
-	getSpeciesDetailItemList,
-	getSpeciesDetailItemSingle,
-} from "@/services/speciesDetail.service";
-import { iSpeciesDetail } from "@/interfaces/speciesDetail.interface";
+	getPeopleDetail,
+	getPeopleDetailItemList,
+} from "@/services/peopleDetail.service";
+import { iPeople } from "@/interfaces/peopleDetail.interface";
 import DetailItem from "@/components/DetailItem";
+import buildLinkElements, {
+	iBuildLinkElementsLink,
+} from "@/helpers/buildLinkElements.helper";
 
 export default function speciesDetail() {
 	const router = useRouter();
 	const pid = router.query.pid;
-	const [data, handledata] = useState<iSpeciesDetail>();
-	const [films, handleFilms] = useState("");
-	const [homeworld, handleHomeworld] = useState("");
-	const [people, handlePeople] = useState("");
+	const [data, handledata] = useState<iPeople>();
+	const [starships, handleStarShips] = useState<iBuildLinkElementsLink[]>([]);
+	const [species, handleSpecies] = useState<iBuildLinkElementsLink[]>([]);
+	const [vehicles, handleVehiculs] = useState<iBuildLinkElementsLink[]>([]);
+	const [starshipsContent, handleStarShipsContent] = useState<JSX.Element[]>(
+		[]
+	);
+	const [speciesContent, handleSpeciesContent] = useState<JSX.Element[]>([]);
+	const [vehiclesContent, handleVehiculsContent] = useState<JSX.Element[]>(
+		[]
+	);
 
 	useEffect(() => {
 		if (pid != undefined) {
-			const apiUrl = `https://swapi.dev/api/species/${pid}/`;
-			getSpeciesDetail(apiUrl, (response: any) => {
+			const apiUrl = `https://swapi.dev/api/people/${pid}/`;
+			getPeopleDetail(apiUrl, (response: any) => {
 				handledata(response.data);
 			});
 		}
 	}, [pid]);
 
 	useEffect(() => {
-		if (data?.films) {
-			getSpeciesDetailItemList(data?.films, (data: string[]) => {
-				handleFilms(data.join(", "));
-			});
+		console.log("data", data);
+		if (data?.starships) {
+			getPeopleDetailItemList(
+				data?.starships,
+				(response: iBuildLinkElementsLink[]) => {
+					handleStarShips(response);
+				}
+			);
 		}
-		if (data?.homeworld) {
-			getSpeciesDetailItemSingle(data?.homeworld, (data: string) => {
-				handleHomeworld(data);
-			});
+		if (data?.species) {
+			getPeopleDetailItemList(
+				data?.species,
+				(response: iBuildLinkElementsLink[]) => {
+					handleSpecies(response);
+				}
+			);
 		}
-		if (data?.people) {
-			getSpeciesDetailItemList(data?.people, (data: string[]) => {
-				handlePeople(data.join(", "));
-			});
+		if (data?.vehicles) {
+			getPeopleDetailItemList(
+				data?.vehicles,
+				(response: iBuildLinkElementsLink[]) => {
+					handleVehiculs(response);
+				}
+			);
 		}
 	}, [data]);
+
+	useEffect(() => {
+		handleStarShipsContent([...buildLinkElements("/starships", starships)]);
+	}, [starships]);
+
+	useEffect(() => {
+		handleSpeciesContent([...buildLinkElements("/species", species)]);
+	}, [species]);
+
+	useEffect(() => {
+		handleVehiculsContent([...buildLinkElements("/planets", vehicles)]);
+	}, [vehicles]);
 
 	return (
 		<>
 			<Head>
-				<title>Star Wars | Espèces</title>
+				<title>Star Wars | Personnages | {data?.name}</title>
 			</Head>
 			<Header />
 			<main>
 				<h1>{data?.name}</h1>
-				<DetailItem
-					title="Hauteur"
-					value={data?.average_height + "cm"}
-				/>
-				<DetailItem
-					title="Espérance de vie"
-					value={data?.average_lifespan + " années"}
-				/>
-				<DetailItem
-					title="Classification"
-					value={data?.classification}
-				/>
-				<DetailItem title="Langue" value={data?.language} />
-				<DetailItem title="Filmes" value={films} />
-				<DetailItem title="Planète d'origine" value={homeworld} />
-				<DetailItem title="Personnes connues" value={people} />
+				<DetailItem title="Genre">{data?.gender}</DetailItem>
+				<DetailItem title="Couleur de cheveux">
+					{data?.hair_color}
+				</DetailItem>
+				<DetailItem title="Hauteur">{data?.height + "cm"}</DetailItem>
+				<DetailItem title="Poids">{data?.mass + "kg"}</DetailItem>
+				<DetailItem title="Espèces">{speciesContent}</DetailItem>
+				<DetailItem title="Vaissaux">{starshipsContent}</DetailItem>
+				<DetailItem title="Véhicules">{vehiclesContent}</DetailItem>
 			</main>
 		</>
 	);

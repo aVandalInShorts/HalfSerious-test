@@ -3,10 +3,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import {
-	getPlanetsDetail,
-	getPlanetsDetailItemList,
-} from "@/services/planetsDetail.service";
-import { iPlanets } from "@/interfaces/planetsDetail.interface";
+	getStarshipsDetail,
+	getStarshipsDetailItemList,
+} from "@/services/starshipsDetail.service";
+import { iVehicles } from "@/interfaces/vehiclesDetail.interface";
 import DetailItem from "@/components/DetailItem";
 import buildLinkElements, {
 	iBuildLinkElementsLink,
@@ -15,18 +15,16 @@ import buildLinkElements, {
 export default function speciesDetail() {
 	const router = useRouter();
 	const pid = router.query.pid;
-	const [data, handledata] = useState<iPlanets>();
+	const [data, handledata] = useState<iVehicles>();
 	const [films, handleFilms] = useState<iBuildLinkElementsLink[]>([]);
 	const [filmsContent, handleFilmsContent] = useState<JSX.Element[]>([]);
-	const [residents, handleResidents] = useState<iBuildLinkElementsLink[]>([]);
-	const [residentsContent, handleResidentsContent] = useState<JSX.Element[]>(
-		[]
-	);
+	const [pilots, handlePilots] = useState<iBuildLinkElementsLink[]>([]);
+	const [pilotsContent, handlePilotsContent] = useState<JSX.Element[]>([]);
 
 	useEffect(() => {
 		if (pid != undefined) {
-			const apiUrl = `https://swapi.dev/api/planets/${pid}/`;
-			getPlanetsDetail(apiUrl, (response: any) => {
+			const apiUrl = `https://swapi.dev/api/vehicles/${pid}/`;
+			getStarshipsDetail(apiUrl, (response: any) => {
 				handledata(response.data);
 			});
 		}
@@ -35,18 +33,18 @@ export default function speciesDetail() {
 	useEffect(() => {
 		console.log("data", data);
 		if (data?.films) {
-			getPlanetsDetailItemList(
+			getStarshipsDetailItemList(
 				data?.films,
 				(response: iBuildLinkElementsLink[]) => {
 					handleFilms(response);
 				}
 			);
 		}
-		if (data?.residents) {
-			getPlanetsDetailItemList(
-				data?.residents,
+		if (data?.pilots) {
+			getStarshipsDetailItemList(
+				data?.pilots,
 				(response: iBuildLinkElementsLink[]) => {
-					handleResidents(response);
+					handlePilots(response);
 				}
 			);
 		}
@@ -57,27 +55,26 @@ export default function speciesDetail() {
 	}, [films]);
 
 	useEffect(() => {
-		handleResidentsContent([...buildLinkElements("/people", residents)]);
-	}, [residents]);
+		handlePilotsContent([...buildLinkElements("/people", pilots)]);
+	}, [pilots]);
 
 	return (
 		<>
 			<Head>
-				<title>Star Wars | Planètes | {data?.name}</title>
+				<title>Star Wars | Véhicules | {data?.name}</title>
 			</Head>
 			<Header />
 			<main>
 				<h1>{data?.name}</h1>
-				<DetailItem title="Climat">{data?.climate}</DetailItem>
-				<DetailItem title="Diamètre">{data?.diameter}</DetailItem>
-				<DetailItem title="gravity">{data?.gravity}</DetailItem>
-				<DetailItem title="Période orbitale">
-					{data?.orbital_period + " jours"}
+				<DetailItem title="MGLT (Mégalimière par heure)"></DetailItem>
+				<DetailItem title="Cargo">
+					{data?.cargo_capacity + " kg"}
 				</DetailItem>
-				<DetailItem title="Rotation">
-					{data?.rotation_period + " heures"}
-				</DetailItem>
-				<DetailItem title="Résidents">{residentsContent}</DetailItem>
+				<DetailItem title="Équipage">{data?.crew}</DetailItem>
+				<DetailItem title="Passagers">{data?.passengers}</DetailItem>
+				<DetailItem title="Modèle">{data?.model}</DetailItem>
+				<DetailItem title="Longueur">{data?.length + " m"}</DetailItem>
+				<DetailItem title="Pilotes">{pilotsContent}</DetailItem>
 				<DetailItem title="Films">{filmsContent}</DetailItem>
 			</main>
 		</>

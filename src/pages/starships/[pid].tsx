@@ -3,72 +3,82 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import {
-	getSpeciesDetail,
-	getSpeciesDetailItemList,
-	getSpeciesDetailItemSingle,
-} from "@/services/speciesDetail.service";
-import { iSpeciesDetail } from "@/interfaces/speciesDetail.interface";
+	getStarshipsDetail,
+	getStarshipsDetailItemList,
+} from "@/services/starshipsDetail.service";
+import { iStarships } from "@/interfaces/starshipsDetail.interface";
 import DetailItem from "@/components/DetailItem";
+import buildLinkElements, {
+	iBuildLinkElementsLink,
+} from "@/helpers/buildLinkElements.helper";
 
 export default function speciesDetail() {
 	const router = useRouter();
 	const pid = router.query.pid;
-	const [data, handledata] = useState<iSpeciesDetail>();
-	const [films, handleFilms] = useState("");
-	const [homeworld, handleHomeworld] = useState("");
-	const [people, handlePeople] = useState("");
+	const [data, handledata] = useState<iStarships>();
+	const [films, handleFilms] = useState<iBuildLinkElementsLink[]>([]);
+	const [filmsContent, handleFilmsContent] = useState<JSX.Element[]>([]);
+	const [pilots, handlePilots] = useState<iBuildLinkElementsLink[]>([]);
+	const [pilotsContent, handlePilotsContent] = useState<JSX.Element[]>([]);
 
 	useEffect(() => {
 		if (pid != undefined) {
-			const apiUrl = `https://swapi.dev/api/species/${pid}/`;
-			getSpeciesDetail(apiUrl, (response: any) => {
+			const apiUrl = `https://swapi.dev/api/starships/${pid}/`;
+			getStarshipsDetail(apiUrl, (response: any) => {
 				handledata(response.data);
 			});
 		}
 	}, [pid]);
 
 	useEffect(() => {
+		console.log("data", data);
 		if (data?.films) {
-			getSpeciesDetailItemList(data?.films, (data: string[]) => {
-				handleFilms(data.join(", "));
-			});
+			getStarshipsDetailItemList(
+				data?.films,
+				(response: iBuildLinkElementsLink[]) => {
+					handleFilms(response);
+				}
+			);
 		}
-		if (data?.homeworld) {
-			getSpeciesDetailItemSingle(data?.homeworld, (data: string) => {
-				handleHomeworld(data);
-			});
-		}
-		if (data?.people) {
-			getSpeciesDetailItemList(data?.people, (data: string[]) => {
-				handlePeople(data.join(", "));
-			});
+		if (data?.pilots) {
+			getStarshipsDetailItemList(
+				data?.pilots,
+				(response: iBuildLinkElementsLink[]) => {
+					handlePilots(response);
+				}
+			);
 		}
 	}, [data]);
+
+	useEffect(() => {
+		handleFilmsContent([...buildLinkElements("/films", films)]);
+	}, [films]);
+
+	useEffect(() => {
+		handlePilotsContent([...buildLinkElements("/people", pilots)]);
+	}, [pilots]);
 
 	return (
 		<>
 			<Head>
-				<title>Star Wars | Espèces</title>
+				<title>Star Wars | Planètes | {data?.name}</title>
 			</Head>
 			<Header />
 			<main>
 				<h1>{data?.name}</h1>
-				<DetailItem
-					title="Hauteur"
-					value={data?.average_height + "cm"}
-				/>
-				<DetailItem
-					title="Espérance de vie"
-					value={data?.average_lifespan + " années"}
-				/>
-				<DetailItem
-					title="Classification"
-					value={data?.classification}
-				/>
-				<DetailItem title="Langue" value={data?.language} />
-				<DetailItem title="Filmes" value={films} />
-				<DetailItem title="Planète d'origine" value={homeworld} />
-				<DetailItem title="Personnes connues" value={people} />
+				<DetailItem title="MGLT (Mégalimière par heure)">
+					{data?.MGLT}
+				</DetailItem>
+				<DetailItem title="Cargo">
+					{data?.cargo_capacity + " kg"}
+				</DetailItem>
+				<DetailItem title="Équipage">{data?.crew}</DetailItem>
+				<DetailItem title="Passagers">{data?.passengers}</DetailItem>
+				<DetailItem title="Classe">{data?.starship_class}</DetailItem>
+				<DetailItem title="Modèle">{data?.model}</DetailItem>
+				<DetailItem title="Longueur">{data?.length + " m"}</DetailItem>
+				<DetailItem title="Pilotes">{pilotsContent}</DetailItem>
+				<DetailItem title="Films">{filmsContent}</DetailItem>
 			</main>
 		</>
 	);

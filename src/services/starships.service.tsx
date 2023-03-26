@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getSpecies = (url: string, cb: any) => {
+const getStarships = (url: string, cb: any) => {
 	handleRequest(url, cb);
 };
 
@@ -10,4 +10,4 @@ const handleRequest = (url: string, cb: any) => {
 	});
 };
 
-export { getSpecies };
+export { getStarships };

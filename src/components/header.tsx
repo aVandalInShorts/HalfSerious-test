@@ -54,9 +54,9 @@ export default function Header() {
 					Vaissaux
 				</Link>
 				<Link
-					href="/vehicules"
+					href="/vehicles"
 					className={
-						router.pathname.startsWith("/vehicules") ? "active" : ""
+						router.pathname.startsWith("/vehicles") ? "active" : ""
 					}
 				>
 					Véhicules

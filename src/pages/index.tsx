@@ -27,7 +27,7 @@ export default function Home() {
 					<Link href="/starships" className={styles.homeLink}>
 						Vaissaux
 					</Link>
-					<Link href="/vehicules" className={styles.homeLink}>
+					<Link href="/vehicles" className={styles.homeLink}>
 						Véhicules
 					</Link>
 				</div>
