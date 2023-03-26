@@ -13,6 +13,7 @@ export default function Home() {
 	const [nextUrl, handleNextUrl] = useState("");
 
 	useEffect(() => {
+		console.log("222");
 		getSpecies(apiUrl, (response: any) => {
 			handleItems([...response.data.results]);
 			handleNextUrl(response.data.next);
@@ -41,10 +42,10 @@ export default function Home() {
 				<title>Star Wars | Espèces</title>
 			</Head>
 			<Header />
-			<main className={styles.main}>
+			<main>
 				<h1>Espèces</h1>
 				<List>
-					{items.map((item) => (
+					{items.map((item, index) => (
 						<ListItem
 							title={item.name}
 							href={
@@ -53,6 +54,7 @@ export default function Home() {
 									item.url.split("/").length - 2
 								]
 							}
+							key={"list-item-" + index}
 						/>
 					))}
 				</List>

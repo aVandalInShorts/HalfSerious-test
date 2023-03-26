@@ -1,0 +1,15 @@
+.detailItem {
+	display: flex;
+	align-items: baseline;
+	gap: 15px;
+	margin-bottom: 10px;
+}
+
+.detailItemTitle {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.detailItemValue {
+	font-size: 18px;
+}
