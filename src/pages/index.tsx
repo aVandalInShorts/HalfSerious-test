@@ -2,8 +2,22 @@ import Head from "next/head";
 import styles from "@/styles/pages/home.module.scss";
 import Header from "@/components/Header";
 import Link from "next/link";
+import { getImage } from "@/services/index.service";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+	const [imageUrl, handleImageUrl] = useState("");
+
+	useEffect(() => {
+		fetchImage();
+	}, []);
+
+	const fetchImage = () => {
+		getImage().then((res: any) => {
+			handleImageUrl(res.response.results[0].urls.full);
+		});
+	};
+
 	return (
 		<>
 			<Head>
@@ -30,6 +44,10 @@ export default function Home() {
 					<Link href="/vehicles" className={styles.homeLink}>
 						Véhicules
 					</Link>
+				</div>
+
+				<div className={styles.imageCtn}>
+					{<img src={imageUrl} alt="Image générée" />}
 				</div>
 			</main>
 		</>
