@@ -1,6 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HalfSerious - Test technique
+
+Voici mon test technique, programmé en React avec next.js. Plus bas sont les indications pour le rouler.
+
+J'ai mis un peu plus que le minimum demandé pour le test. Le tout m'a donc prit entre 6h et 7h. le but était vraiment de démontrer une plus grande compréhension d'architecture, de maintenance et d'évolutivité en terme de grosseur ou de changement de technologie en plus de mettre une base de visiel.
+
+Les interfaces des requêtes ont été générées par https://quicktype.io/typescript.
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 
@@ -26,8 +34,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
