@@ -11,6 +11,11 @@
 	font-size: 48px;
 	font-family: var(--ff-heading);
 	color: var(--yellow);
+	transition: opacity 200ms ease;
+
+	&:hover {
+		opacity: 0.7;
+	}
 }
 
 .imageCtn {

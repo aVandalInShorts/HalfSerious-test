@@ -9,21 +9,23 @@
 	position: relative;
 
 	&.is-open {
-		.site-header-nav {
-			translate: 0%;
-		}
-
-		.site-header-nav-btn {
-			span {
-				opacity: 0;
+		@media screen and (max-width: 767px) {
+			.site-header-nav {
+				opacity: 1;
 			}
 
-			&:before {
-				rotate: -40deg;
-			}
+			.site-header-nav-btn {
+				span {
+					opacity: 0;
+				}
 
-			&:after {
-				rotate: 40deg;
+				&:before {
+					rotate: -40deg;
+				}
+
+				&:after {
+					rotate: 40deg;
+				}
 			}
 		}
 	}
@@ -44,12 +46,13 @@
 
 	@media screen and (max-width: 767px) {
 		position: absolute;
+		z-index: 10;
 		inset: 100% 0 auto 0;
 		height: calc(100vh - var(--header-height));
-		translate: 100%;
+		opacity: 0;
 		background-color: var(--black);
 		overflow-y: auto;
-		transition: translate 400ms ease;
+		transition: opacity 400ms ease;
 		flex-flow: column nowrap;
 		justify-content: center;
 		align-items: center;

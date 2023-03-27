@@ -23,6 +23,10 @@
 		text-align: center;
 		color: var(--yellow);
 		transform: rotateX(-30deg);
+
+		@media screen and (max-width: 767px) {
+			font-size: 32px;
+		}
 	}
 
 	p a {
